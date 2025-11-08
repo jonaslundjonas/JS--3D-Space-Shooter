@@ -682,7 +682,19 @@
           const targetY = Math.max(GRID_Y + 0.5, Math.min(PLAYER_BOUNDS_Y, touchTargetY));
           player.position.y += (targetY - player.position.y) * 0.1;
           
-          targetRotation = moveDeltaX * -2.0; // Bank based on horizontal speed
+          // --- FIX: Use a clamped delta for rotation ---
+          const MAX_ROTATION_INFLUENCE = 0.3; // Corresponds to max banking
+          let rotationInfluence = moveDeltaX;
+
+          // Add a deadzone to prevent jittery rotation when close
+          if (Math.abs(rotationInfluence) < 0.01) {
+              rotationInfluence = 0;
+          }
+
+          // Clamp the influence to prevent extreme banking
+          rotationInfluence = Math.max(-MAX_ROTATION_INFLUENCE, Math.min(MAX_ROTATION_INFLUENCE, rotationInfluence));
+
+          targetRotation = rotationInfluence * -2.0; // Bank based on clamped horizontal speed
 
       } else {
           // --- Keyboard Controls ---
