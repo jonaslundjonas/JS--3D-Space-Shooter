@@ -6,8 +6,7 @@
       /* Apply 8-bit font */
       font-family: 'Press Start 2P', 'Courier New', monospace;
       cursor: crosshair;
-      /* Prevent touch actions on the page (scrolling, zooming) */
-      touch-action: none;
+      /* --- REMOVED touch-action: none; from body --- */
     }
     #hud {
       position: absolute;
@@ -15,7 +14,8 @@
       left: 20px;
       color: #ff00ff;
       font-size: 16px; /* Adjusted for pixel font */
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 10px #ff00ff;
       font-weight: bold;
       user-select: none;
       display: none; /* Hidden by default */
@@ -23,24 +23,28 @@
     }
     .score {
       color: #00ffff;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 10px #00ffff;
     }
     .weapon {
       font-size: 14px; /* Adjusted */
       color: #ffff00;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 10px #ffff00;
       margin-top: 10px;
     }
     .bombs {
       font-size: 14px; /* Adjusted */
       color: #ff8800;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 10px #ff8800;
       margin-top: 10px;
     }
     .distance {
       font-size: 14px; /* Adjusted */
       color: #00ff00;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 10px #00ff00;
       margin-top: 10px;
     }
     .controls {
@@ -49,6 +53,8 @@
       margin-top: 15px;
       opacity: 0.9;
       color: #ffffff;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 8px #ffffff;
     }
     #enemyInfo {
       position: absolute;
@@ -57,10 +63,15 @@
       color: #ff00ff;
       font-size: 12px; /* Adjusted */
       text-align: right;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 8px #ff00ff;
       line-height: 1.6; /* Added for readability */
       user-select: none;
       display: none; /* Hidden by default */
+    }
+    /* Added pixel shadow to specific enemy info text */
+    #enemyInfo div {
+        text-shadow: 2px 2px 0px #000;
     }
     
     /* --- Updated Start Screen Style --- */
@@ -73,7 +84,6 @@
       font-size: 48px;
       text-align: center;
       text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 4px 4px 0px #000;
-      /* Re-added glowing box style */
       background: rgba(0,0,0,0.9);
       padding: 50px;
       border-radius: 20px;
@@ -93,7 +103,8 @@
      #startScreen p {
         font-size: 14px; /* Adjusted */
         color: #ffffff;
-        text-shadow: 2px 2px 0px #000;
+        /* Added glow */
+        text-shadow: 2px 2px 0px #000, 0 0 6px #ffffff;
         margin-top: 30px;
      }
     /* --- Updated Retro Button Style --- */
@@ -102,18 +113,17 @@
       padding: 20px 40px;
       font-size: 24px;
       cursor: pointer;
-      /* Pink glowing style */
       background: linear-gradient(to bottom, #ff00ff, #aa00aa);
       border: 3px solid #ff00ff;
       border-radius: 10px;
       font-family: 'Press Start 2P', 'Courier New', monospace;
       font-weight: bold;
       color: #ffffff;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 15px #ffffff;
       box-shadow: 0 0 20px #ff00ff;
       letter-spacing: 3px;
     }
-    /* Removed old hover/active styles */
     #startScreen button:hover {}
     #startScreen button:active {}
 
@@ -139,13 +149,15 @@
         font-size: 28px;
         margin-top: 20px;
         color: #00ffff;
-        text-shadow: 0 0 20px #00ffff, 2px 2px 0px #000;
+        /* Updated glow */
+        text-shadow: 2px 2px 0px #000, 0 0 20px #00ffff;
     }
     #gameOver > div:nth-of-type(3) {
         font-size: 20px;
         margin-top: 10px;
         color: #00ff00;
-        text-shadow: 0 0 20px #00ff00, 2px 2px 0px #000;
+        /* Updated glow */
+        text-shadow: 2px 2px 0px #000, 0 0 20px #00ff00;
     }
     
     /* Retro restart button */
@@ -154,20 +166,24 @@
       padding: 20px 40px;
       font-size: 24px;
       cursor: pointer;
-      /* Pink glowing style */
       background: linear-gradient(to bottom, #ff00ff, #aa00aa);
       border: 3px solid #ff00ff;
       border-radius: 10px;
       font-family: 'Press Start 2P', 'Courier New', monospace;
       font-weight: bold;
       color: #ffffff;
-      text-shadow: 2px 2px 0px #000;
+      /* Added glow */
+      text-shadow: 2px 2px 0px #000, 0 0 15px #ffffff;
       box-shadow: 0 0 20px #ff00ff;
       letter-spacing: 3px;
     }
     #gameOver button:hover {}
     #gameOver button:active {}
-  </style>  <!-- Add Tone.js Library -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script></head><body>  <div id="hud">    <div class="score">SCORE: <span id="score">000000</span></div>    <div>LIVES: <span id="lives">♥ ♥ ♥ ♥ ♥</span></div>    <div class="weapon">WEAPON: <span id="weapon">SINGLE</span></div>    <div class="bombs">BOMBS: <span id="bombs">0</span></div>    <div class="distance">DISTANCE: <span id="distance">0</span>m</div>    <div class="controls">      WASD/ARROWS/TOUCH: MOVE<br>      SPACE/TOUCH: FIRE<br>      B: BOMB    </div>  </div>    <div id="enemyInfo">    <div style="color: #ff0000; text-shadow: 2px 2px 0px #000">SCOUT: 10 PTS (1 HP)</div>    <div style="color: #ff6600; text-shadow: 2px 2px 0px #000">FIGHTER: 25 PTS (2 HP)</div>    <div style="color: #ff00ff; text-shadow: 2px 2px 0px #000">HEAVY: 50 PTS (3 HP)</div>    <div style="color: #00ff00; text-shadow: 2px 2px 0px #000">BOMBER: 100 PTS (5 HP)</div>    <div style="color: #ffff00; text-shadow: 2px 2px 0px #000">BALL: 75 PTS (4 HP, Bounces)</div>  </div>  <!-- --- New Start Screen --- -->  <div id="startScreen">    <h1>3D Space Shooter</h1>    <button onclick="startGame()">START GAME</button>    <p>Created by Jonas Lund 2025</p>  </div>  <div id="gameOver">    <div>GAME OVER</div>    <!-- Removed inline styles, will be controlled by CSS -->    <div>      FINAL SCORE: <span id="finalScore">0</span>    </div>    <div>      DISTANCE: <span id="finalDistance">0</span>m    </div>    <button onclick="location.reload()">RESTART</button>  </div>  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>  <script>
+  </style>  <!-- Add Tone.js Library -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script></head><body>  <div id="hud">    <div class="score">SCORE: <span id="score">000000</span></div>    <div>LIVES: <span id="lives">♥ ♥ ♥ ♥ ♥</span></div>    <div class="weapon">WEAPON: <span id="weapon">SINGLE</span></div>    <div class="bombs">BOMBS: <span id="bombs">0</span></div>    <div class="distance">DISTANCE: <span id="distance">0</span>m</div>    <div class="controls">      WASD/ARROWS/TOUCH: MOVE<br>      SPACE/TOUCH: FIRE<br>      B: BOMB    </div>  </div>    <div id="enemyInfo">    <div style="color: #ff0000;">SCOUT: 10 PTS (1 HP)</div>    <div style="color: #ff6600;">FIGHTER: 25 PTS (2 HP)</div>    <div style="color: #ff00ff;">HEAVY: 50 PTS (3 HP)</div>    <div style="color: #00ff00;">BOMBER: 100 PTS (5 HP)</div>    <div style="color: #ffff00;">BALL: 75 PTS (4 HP, Bounces)</div>  </div>  <!-- --- New Start Screen --- -->  <div id="startScreen">    <h1>3D Space Shooter</h1>
+    <!-- UPDATED: Removed inline events, added ID -->
+    <button id="startButton">START GAME</button>    <p>Created by Jonas Lund 2025</p>  </div>  <div id="gameOver">    <div>GAME OVER</div>    <!-- Removed inline styles, will be controlled by CSS -->    <div>      FINAL SCORE: <span id="finalScore">0</span>    </div>    <div>      DISTANCE: <span id="finalDistance">0</span>m    </div>
+    <!-- UPDATED: Removed inline events, added ID -->
+    <button id="restartButton">RESTART</button>  </div>  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>  <script>
     var scene, camera, renderer, player, gridHelper;
     var bullets = [], enemies = [], explosions = [], powerups = [];
     var enemyBullets = [], spaceBombs = []; // Added spaceBombs array
@@ -201,6 +217,7 @@
     // --- Audio State ---
     var sounds = {};
     var audioStarted = false;
+    var ballTexture = null; // For ball texture
 
     // --- CONSTANTS ---
     const PLAYER_SPEED = 0.2;
@@ -213,11 +230,11 @@
 
     // --- All enemy types defined ---
     var enemyTypes = {
-      // Enemies are 40% smaller, shootChance reduced by 60%
-      scout: { color: 0xff0000, size: 0.36, speed: 0.12, health: 1, score: 10, shootChance: 0.002 },
-      fighter: { color: 0xff6600, size: 0.48, speed: 0.08, health: 2, score: 25, shootChance: 0.004 },
-      heavy: { color: 0xff00ff, size: 0.72, speed: 0.05, health: 3, score: 50, shootChance: 0.006 },
-      bomber: { color: 0x00ff00, size: 0.9, speed: 0.04, health: 5, score: 100, shootChance: 0.008 },
+      // --- Enemies shoot 60% less frequently ---
+      scout: { color: 0xff0000, size: 0.36, speed: 0.12, health: 1, score: 10, shootChance: 0.00025 },
+      fighter: { color: 0xff6600, size: 0.48, speed: 0.08, health: 2, score: 25, shootChance: 0.0005 },
+      heavy: { color: 0xff00ff, size: 0.72, speed: 0.05, health: 3, score: 50, shootChance: 0.00075 },
+      bomber: { color: 0x00ff00, size: 0.9, speed: 0.04, health: 5, score: 100, shootChance: 0.001 },
       ball: { color: 0xffff00, size: 0.54, speed: 0.09, health: 4, score: 75, shootChance: 0 } // Balls don't shoot
     };
 
@@ -240,6 +257,10 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.8;
+      
+      // --- ADDED: Apply touch-action: none; ONLY to the canvas ---
+      renderer.domElement.style.touchAction = 'none';
+
       document.body.appendChild(renderer.domElement);
       
       gridHelper = new THREE.GridHelper(100, 50, 0xff00ff, 0x00ffff);
@@ -257,6 +278,7 @@
       createPlayer();
       setupLighting();
       initAudio(); // Prepare sounds
+      ballTexture = createBallTexture(); // Create ball texture
       
       // Keyboard listeners
       document.addEventListener('keydown', function(e) { 
@@ -264,10 +286,19 @@
       });
       document.addEventListener('keyup', function(e) { keys[e.key] = false; });
       
-      // Touch listeners
-      document.addEventListener('touchstart', onTouchStart, { passive: false });
-      document.addEventListener('touchmove', onTouchMove, { passive: false });
-      document.addEventListener('touchend', onTouchEnd);
+      // --- UPDATED: Button Listeners ---
+      // These are active immediately
+      const startButton = document.getElementById('startButton');
+      const restartButton = document.getElementById('restartButton');
+      
+      // --- SIMPLIFIED: Only listen for click ---
+      // 'click' works for both mouse and standard taps on mobile
+      startButton.addEventListener('click', startGame);
+      restartButton.addEventListener('click', () => {
+          location.reload();
+      });
+      
+      // --- MOVED game touch listeners to startGame() ---
 
       window.addEventListener('resize', onResize);
       
@@ -281,16 +312,26 @@
 
         // Start Audio Context
         if (!audioStarted) {
-            await Tone.start();
-            console.log("Audio context started");
-            audioStarted = true;
-            sounds.start.triggerAttackRelease(['C4', 'E4', 'G4', 'C5'], '8n', Tone.now());
+            try {
+                await Tone.start();
+                console.log("Audio context started");
+                audioStarted = true;
+                sounds.start.triggerAttackRelease(['C4', 'E4', 'G4', 'C5'], '8n', Tone.now());
+            } catch (e) {
+                console.error("Tone.start() failed", e);
+            }
         }
 
         // Update UI
         document.getElementById('startScreen').style.display = 'none';
         document.getElementById('hud').style.display = 'block';
         document.getElementById('enemyInfo').style.display = 'block';
+
+        // --- ADDED: Activate game touch listeners on the canvas ---
+        // We add these *after* the start button is pressed
+        renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
         // Spawn enemies and set invincibility
         spawnInitialWave();
@@ -354,11 +395,14 @@
         touchTargetY = targetPos.y;
     }
 
+    // --- UPDATED onTouchStart ---
     function onTouchStart(event) {
-        event.preventDefault(); // Prevent page scrolling
-        if (!gameStarted) {
-            startGame(); // Start game on first touch
-        }
+        // This listener is only on the canvas, so no need to check for buttons.
+        
+        // Prevent default scrolling/zooming
+        event.preventDefault(); 
+        
+        // This is a game touch, so update position
         isTouching = true;
         updateTouchPosition(event.touches[0]);
     }
@@ -564,9 +608,7 @@
       if (audioStarted) {
           sounds.gameOver.triggerAttackRelease(['C5', 'G4', 'E4', 'C4'], '4n', Tone.now());
       }
-      if (animationHandle) {
-          cancelAnimationFrame(animationHandle);
-      }
+      // --- REMOVED cancelAnimationFrame ---
       document.getElementById('finalScore').textContent = score.toString().padStart(6, '0');
       document.getElementById('finalDistance').textContent = Math.floor(distance).toString();
       document.getElementById('gameOver').style.display = 'block';
@@ -646,15 +688,13 @@
       if (shootCooldown > 0 || !player) return;
 
       if (audioStarted) {
-          // --- FIX: Create synth on-the-fly ---
-          const fireSound = new Tone.MembraneSynth({
-              "volume": -10,
-              "pitchDecay": 0.01,
-              "octaves": 10,
-              "oscillator": { "type": "triangle" },
-              "envelope": { "attack": 0.001, "decay": 0.1, "sustain": 0.01, "release": 0.1 }
+          // --- NEW 8-bit Fire Sound ---
+          const fireSound = new Tone.Synth({
+              "volume": -20, // Quieter
+              "oscillator": { "type": "triangle" }, // Softer wave
+              "envelope": { "attack": 0.001, "decay": 0.05, "sustain": 0, "release": 0.1 }
           }).toDestination();
-          fireSound.triggerAttackRelease("C5", "16n", Tone.now());
+          fireSound.triggerAttackRelease("G4", "32n", Tone.now()); // Lower pitch
           setTimeout(() => fireSound.dispose(), 200); // Dispose after sound
       }
 
@@ -727,6 +767,12 @@
         
         bombs--;
         bombCooldown = 120; // 2 second cooldown
+        
+        // --- ADDED: Grant 2 seconds of invincibility ---
+        invincible = true;
+        // Don't override a longer invincibility (e.g., from respawn)
+        invincibleTimer = Math.max(invincibleTimer, 120); 
+
 
         var geometry = new THREE.SphereGeometry(0.3, 16, 16);
         var material = new THREE.MeshBasicMaterial({
@@ -873,6 +919,33 @@
 
         return ship;
     }
+    
+    // --- NEW: Helper function for Ball Texture ---
+    function createBallTexture() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 64;
+        canvas.height = 64;
+        var context = canvas.getContext('2d');
+        
+        // Mid-grey
+        context.fillStyle = '#888888';
+        context.fillRect(0, 0, 64, 64);
+        
+        // Lighter "pixel" dots
+        context.fillStyle = '#FFFFFF';
+        for (var i = 0; i < 100; i++) {
+            var x = Math.random() * 64;
+            var y = Math.random() * 64;
+            context.fillRect(x, y, 2, 2);
+        }
+        
+        var texture = new THREE.CanvasTexture(canvas);
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(4, 4); // Tile the texture
+        return texture;
+    }
+
 
     function createEnemy(type) {
       var params = enemyTypes[type];
@@ -900,7 +973,14 @@
 
       if (type === 'ball') {
         geometry = new THREE.SphereGeometry(params.size, 16, 16);
-        material = new THREE.MeshPhongMaterial({ color: params.color, emissive: params.color, emissiveIntensity: 1.5 });
+        // --- ADDED TEXTURE ---
+        material = new THREE.MeshPhongMaterial({ 
+            color: params.color, 
+            emissive: params.color, 
+            emissiveIntensity: 1.5,
+            bumpMap: ballTexture, // Add texture
+            bumpScale: 0.1 // Adjust effect
+        });
         // Add physics for bouncing
         enemyGroup.userData.vy = 0; // Initial vertical velocity
         enemyGroup.userData.gravity = -0.02; // Stronger gravity
@@ -949,7 +1029,8 @@
             var bounceThreshold = GRID_Y + userData.size * 0.5; 
             if (enemy.position.y < bounceThreshold && userData.vy < 0) {
                 enemy.position.y = bounceThreshold; // Don't go through floor
-                userData.vy = 0.3; // Set fixed upward velocity for high bounce
+                // --- HIGHER BOUNCE ---
+                userData.vy = 0.45; // Set fixed upward velocity for high bounce
             }
             enemy.rotation.z += 0.08; // Roll
         } else {
@@ -980,15 +1061,13 @@
 
     function createEnemyBullet(startPosition) {
         if (audioStarted) {
-            // --- FIX: Create synth on-the-fly ---
-            const fireSound = new Tone.MembraneSynth({
-                "volume": -15,
-                "pitchDecay": 0.02,
-                "octaves": 6,
-                "oscillator": { "type": "triangle" },
-                "envelope": { "attack": 0.001, "decay": 0.2, "sustain": 0.01, "release": 0.2 }
+            // --- NEW 8-bit Enemy Fire Sound ---
+            const fireSound = new Tone.Synth({
+                "volume": -22, // Quieter
+                "oscillator": { "type": "triangle" }, // Softer wave
+                "envelope": { "attack": 0.001, "decay": 0.1, "sustain": 0, "release": 0.1 }
             }).toDestination();
-            fireSound.triggerAttackRelease("C3", "8n", Tone.now());
+            fireSound.triggerAttackRelease("C4", "16n", Tone.now()); // Lower "pew"
             setTimeout(() => fireSound.dispose(), 300); // Dispose after sound
         }
         var geometry = new THREE.SphereGeometry(0.15, 8, 8);
@@ -1024,6 +1103,27 @@
     }
 
     // --- Powerup Logic ---
+    
+    // --- NEW: Creates the bomb powerup mesh ---
+    function createBombPowerupMesh() {
+        var bombGroup = new THREE.Group();
+        
+        // Body (black sphere)
+        var bodyGeom = new THREE.SphereGeometry(0.25, 16, 16);
+        var bodyMat = new THREE.MeshPhongMaterial({ color: 0x111111, shininess: 20 });
+        var body = new THREE.Mesh(bodyGeom, bodyMat);
+        bombGroup.add(body);
+
+        // Fuse (grey cylinder)
+        var fuseGeom = new THREE.CylinderGeometry(0.05, 0.05, 0.15, 8);
+        var fuseMat = new THREE.MeshPhongMaterial({ color: 0x888888 });
+        var fuse = new THREE.Mesh(fuseGeom, fuseMat);
+        fuse.position.y = 0.25; // Sits on top
+        bombGroup.add(fuse);
+        
+        return bombGroup;
+    }
+
     function createHeartShape() {
         const shape = new THREE.Shape();
         const x = -0.25, y = -0.5;
@@ -1042,30 +1142,28 @@
     function createPowerup(type, position) {
       var params = powerupTypes[type];
       var geometry;
-      var material = new THREE.MeshPhongMaterial({
-          color: params.color,
-          emissive: params.color,
-          emissiveIntensity: 2.0,
-          shininess: 100
-      });
+      var material;
+      var powerupMesh;
 
       if (type === 'extra-life') {
           geometry = createHeartShape();
+          material = new THREE.MeshPhongMaterial({
+              color: params.color, emissive: params.color, emissiveIntensity: 2.0, shininess: 100
+          });
+          powerupMesh = new THREE.Mesh(geometry, material);
       } else if (type === 'bomb') {
-          // Orange Sphere
-          geometry = new THREE.SphereGeometry(0.3, 16, 16);
-          var powerupMesh = new THREE.Mesh(geometry, material);
-          powerupMesh.position.copy(position);
-          powerupMesh.userData = { type: params.type };
-          scene.add(powerupMesh);
-          powerups.push(powerupMesh);
-          return; // Return early
+          // Use the new bomb model
+          powerupMesh = createBombPowerupMesh();
+          powerupMesh.scale.set(1.5, 1.5, 1.5); // Make it a bit bigger
       }
       else { // weapon-upgrade or shield
           geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+          material = new THREE.MeshPhongMaterial({
+              color: params.color, emissive: params.color, emissiveIntensity: 2.0, shininess: 100
+          });
+          powerupMesh = new THREE.Mesh(geometry, material);
       }
 
-      var powerupMesh = new THREE.Mesh(geometry, material);
       powerupMesh.position.copy(position);
       powerupMesh.userData = {
           type: params.type,
@@ -1106,14 +1204,14 @@
     // --- Effects Logic ---
     function createExplosion(position, color, size) {
         if (audioStarted) {
-            // --- FIX: Create synth on-the-fly ---
+            // --- NEW 8-bit Explosion Sound ---
             const explosionSound = new Tone.NoiseSynth({
                 "volume": -5,
-                "noise": { "type": "white" },
-                "envelope": { "attack": 0.001, "decay": 0.1, "sustain": 0, "release": 0.1 } 
+                "noise": { "type": "brown" }, // Deeper sound
+                "envelope": { "attack": 0.001, "decay": 0.2, "sustain": 0, "release": 0.2 } 
             }).toDestination();
-            explosionSound.triggerAttackRelease("8n", Tone.now());
-            setTimeout(() => explosionSound.dispose(), 200); // Dispose after sound
+            explosionSound.triggerAttackRelease("4n", Tone.now()); // Longer duration
+            setTimeout(() => explosionSound.dispose(), 500); // Increase dispose time
         }
         var geometry = new THREE.DodecahedronGeometry(size, 0);
         var material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending });
@@ -1158,16 +1256,16 @@
               score += enemy.userData.score;
               createExplosion(enemy.position, enemyTypes[enemy.userData.type].color, enemy.userData.size * 1.5);
               
-              // --- UPDATED DROP RATES ---
-              if (Math.random() < 0.30) { // 30% chance to drop *something*
+              // --- UPDATED DROP RATES (40% total, more bombs/lives) ---
+              if (Math.random() < 0.40) { 
                   var dropType = Math.random();
-                  if (dropType < 0.20) { // 20% chance
+                  if (dropType < 0.15) { // 15% chance
                       createPowerup('weapon-upgrade', enemy.position);
-                  } else if (dropType < 0.40) { // 20% chance
+                  } else if (dropType < 0.25) { // 10% chance
                       createPowerup('shield', enemy.position);
-                  } else if (dropType < 0.70) { // 30% chance
+                  } else if (dropType < 0.50) { // 25% chance
                       createPowerup('extra-life', enemy.position);
-                  } else { // 30% chance
+                  } else { // 50% chance
                       createPowerup('bomb', enemy.position);
                   }
               }
@@ -1309,11 +1407,18 @@
       }
       
       let followX = 0;
-      if (gameStarted && player) {
+      // --- UPDATED: Logic for X-following ---
+      if (gameStarted && !gameOver && player) {
+          // Game is active: follow the player
           followX = player.position.x;
+      } else if (gameOver) {
+          // Game is over: follow the camera as it pans to 0
+          followX = camera.position.x;
       }
+      // If !gameStarted (start screen), followX remains 0, which is correct.
 
-      // --- Grid follows player X ---
+
+      // --- Grid follows player X (or camera) ---
       gridHelper.position.x = followX;
       
       if (scene.userData.stars) {
@@ -1335,20 +1440,19 @@
       }
     }
 
-    // --- MAIN ANIMATE FUNCTION ---
+    // --- MAIN ANIMATE FUNCTION (Refactored for Game Over) ---
     
     function animate() {
-      if (gameOver) {
-        return;
-      }
+      // --- REMOVED gameOver check from top ---
       animationHandle = requestAnimationFrame(animate);
       animationFrame++;
       
-      // Update background elements always
+      // These functions run always, even during Game Over
       updateGridAndStars();
+      updateExplosions();
 
-      if (gameStarted) {
-        // --- GAME LOGIC ---
+      if (gameStarted && !gameOver) {
+        // --- All ACTIVE game logic goes here ---
         if (shootCooldown > 0) shootCooldown--;
         updatePowerupTimers(); 
         updatePlayer();
@@ -1358,35 +1462,39 @@
           fireBullet();
         }
 
-        updateBullets(); // Move player bullets
-        updateEnemies(); // Move/Spawn enemies
-        updateEnemyBullets(); // Move enemy bullets
-        updatePowerups(); // Move powerups
-        updateBombs(); // Move bombs and check for detonation
-        checkCollisions(); // Check all hits
+        updateBullets();
+        updateEnemies();
+        updateEnemyBullets();
+        updatePowerups();
+        updateBombs();
+        checkCollisions();
 
-        // Visual Updates
         updateInvincibility();
         updateEngineEffects();
-        updateExplosions();
         
         // Camera Follow
         camera.position.x += (player.position.x - camera.position.x) * 0.1;
         camera.position.y += (2 - camera.position.y) * 0.1; // Smoothly return to y=2
-        camera.lookAt(player.position.x, player.position.y, player.position.z); // Look at player
+        camera.lookAt(player.position.x, player.position.y, player.position.z);
         
         // Stats Update
         distance += 0.1;
         if (animationFrame % 10 === 0) {
           updateHUD();
         }
-      } else {
+      } else if (gameOver) { // --- NEW BLOCK ---
+        // Game Over screen: keep background scrolling, pan camera to center
+        camera.position.x += (0 - camera.position.x) * 0.02; // Slowly pan to 0
+        camera.position.y += (2 - camera.position.y) * 0.02; // Slowly pan to 2
+        camera.lookAt(0, 0, -10); // Look forward
+      } else if (!gameStarted) {
         // --- START SCREEN "ATTRACT MODE" ---
         camera.position.x = Math.sin(animationFrame * 0.001) * 3;
         camera.position.y = 2 + Math.cos(animationFrame * 0.0015) * 1.5;
         camera.lookAt(0, 0, -10); // Look forward
       }
       
+      // Render must be at the end, outside all conditionals
       renderer.render(scene, camera);
     }
 
