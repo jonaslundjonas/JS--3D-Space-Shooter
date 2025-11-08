@@ -179,7 +179,7 @@
     }
     #gameOver button:hover {}
     #gameOver button:active {}
-  </style>  <!-- Add Tone.js Library -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script></head><body>  <div id="hud">    <div class="score">SCORE: <span id="score">000000</span></div>    <div>LIVES: <span id="lives">♥ ♥ ♥ ♥ ♥</span></div>    <div class="weapon">WEAPON: <span id="weapon">SINGLE</span></div>    <div class="bombs">BOMBS: <span id="bombs">0</span></div>    <div class="distance">DISTANCE: <span id="distance">0</span>m</div>    <div class="controls">      WASD/ARROWS/TOUCH: MOVE<br>      SPACE/TOUCH: FIRE<br>      B: BOMB    </div>  </div>    <div id="enemyInfo">    <div style="color: #ff0000;">SCOUT: 10 PTS (1 HP)</div>    <div style="color: #ff6600;">FIGHTER: 25 PTS (2 HP)</div>    <div style="color: #ff00ff;">HEAVY: 50 PTS (3 HP)</div>    <div style="color: #00ff00;">BOMBER: 100 PTS (5 HP)</div>    <div style="color: #ffff00;">BALL: 75 PTS (4 HP, Bounces)</div>  </div>  <!-- --- New Start Screen --- -->  <div id="startScreen">    <h1>3D Space Shooter</h1>
+  </style>  <!-- Add Tone.js Library -->  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script></head><body>  <div id="hud">    <div class="score">SCORE: <span id="score">000000</span></div>    <div>LIVES: <span id="lives">♥ ♥ ♥ ♥ ♥</span></div>    <div class="weapon">WEAPON: <span id="weapon">SINGLE</span></div>    <div class="bombs">BOMBS: <span id="bombs">0</span></div>    <div class="distance">DISTANCE: <span id="distance">0</span>m</div>    <div class="controls">      WASD/ARROWS/TOUCH: MOVE<br>      SPACE/TOUCH: FIRE<br>      B / 3-TAP: BOMB    </div>  </div>    <div id="enemyInfo">    <div style="color: #ff0000;">SCOUT: 10 PTS (1 HP)</div>    <div style="color: #ff6600;">FIGHTER: 25 PTS (2 HP)</div>    <div style="color: #ff00ff;">HEAVY: 50 PTS (3 HP)</div>    <div style="color: #00ff00;">BOMBER: 100 PTS (5 HP)</div>    <div style="color: #ffff00;">BALL: 75 PTS (4 HP, Bounces)</div>  </div>  <!-- --- New Start Screen --- -->  <div id="startScreen">    <h1>3D Space Shooter</h1>
     <!-- UPDATED: Removed inline events, added ID -->
     <button id="startButton">START GAME</button>    <p>Created by Jonas Lund 2025</p>  </div>  <div id="gameOver">    <div>GAME OVER</div>    <!-- Removed inline styles, will be controlled by CSS -->    <div>      FINAL SCORE: <span id="finalScore">0</span>    </div>    <div>      DISTANCE: <span id="finalDistance">0</span>m    </div>
     <!-- UPDATED: Removed inline events, added ID -->
@@ -213,6 +213,11 @@
     // --- Touch Controls State ---
     var touchTargetX = 0, touchTargetY = 0, isTouching = false;
     const touchMoveVector = new THREE.Vector3();
+    // --- NEW: Triple-tap state ---
+    var touchCount = 0;
+    var lastTapTime = 0;
+    var tapTimeout = null;
+    const TAP_DELAY = 300; // ms
 
     // --- Audio State ---
     var sounds = {};
@@ -395,27 +400,60 @@
         touchTargetY = targetPos.y;
     }
 
-    // --- UPDATED onTouchStart ---
+    // --- UPDATED onTouchStart with Triple-Tap ---
     function onTouchStart(event) {
         // This listener is only on the canvas, so no need to check for buttons.
-        
-        // Prevent default scrolling/zooming
         event.preventDefault(); 
         
-        // This is a game touch, so update position
-        isTouching = true;
-        updateTouchPosition(event.touches[0]);
+        const now = new Date().getTime();
+
+        // --- Handle Triple-Tap-to-Bomb ---
+        if (now - lastTapTime < TAP_DELAY) {
+            // This is a sequential tap
+            touchCount++;
+        } else {
+            // This is a new tap
+            touchCount = 1;
+        }
+        lastTapTime = now;
+
+        // Clear any pending timeout that would reset the count
+        if (tapTimeout) clearTimeout(tapTimeout);
+
+        if (touchCount === 3) {
+            // --- TRIPLE TAP DETECTED ---
+            fireBomb();
+            touchCount = 0; // Reset count
+            lastTapTime = 0; // Reset time
+            isTouching = false; // Do not start steering
+        } else {
+            // --- This is a normal tap (1st or 2nd) or a hold ---
+            
+            // Set a timeout to reset the tap count if the user doesn't tap again
+            tapTimeout = setTimeout(() => {
+                touchCount = 0;
+            }, TAP_DELAY);
+
+            // This is a game touch for steering/firing
+            isTouching = true;
+            updateTouchPosition(event.touches[0]);
+        }
     }
 
     function onTouchMove(event) {
         event.preventDefault(); // Prevent page scrolling
+        // Only move if we are in "steering" mode (not after a triple-tap)
         if (isTouching && event.touches.length > 0) {
             updateTouchPosition(event.touches[0]);
         }
     }
 
     function onTouchEnd(event) {
-        isTouching = false;
+        // If we were steering, stop steering.
+        // The tap count is handled by the timeout in onTouchStart.
+        if (isTouching) {
+            isTouching = false;
+        }
     }
 
 
